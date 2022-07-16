@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import Card from "./Layout/Card";
 
 const FeedBackItem = ({ item }) => {
   return (
-    <div className="card">
+    <Card>
       <div className="num-display">{item.rating}</div>
       <div className="text-display">{item.text}</div>
-    </div>
+    </Card>
   );
 };
 
-FeedBackItem.propTypes = {};
+FeedBackItem.propTypes = {
+  item: PropTypes.object,
+};
 
 export default FeedBackItem;

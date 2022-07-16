@@ -1,5 +1,6 @@
 import React from "react";
 import FeedBackItem from "./FeedBackItem";
+import PropTypes from "prop-types";
 
 const FeedBackList = ({ feedback }) => {
   if (!feedback || feedback.length === 0) {
@@ -12,6 +13,10 @@ const FeedBackList = ({ feedback }) => {
       ))}
     </div>
   );
+};
+
+FeedBackList.propTypes = {
+  feedback: PropTypes.array,
 };
 
 export default FeedBackList;
