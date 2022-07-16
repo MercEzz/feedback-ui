@@ -4,7 +4,7 @@ import FeedBackItem from "./FeedBackItem";
 import PropTypes from "prop-types";
 import FeedbackContext from "../context/FeedBackContext";
 
-const FeedBackList = ({ deleteFunc }) => {
+const FeedBackList = () => {
   const { feedback } = useContext(FeedbackContext);
 
   if (!feedback || feedback.length === 0) {
@@ -20,7 +20,7 @@ const FeedBackList = ({ deleteFunc }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FeedBackItem key={item.id} deleteFunc={deleteFunc} item={item} />
+            <FeedBackItem key={item.id} item={item} />
           </motion.div>
         ))}
       </AnimatePresence>
