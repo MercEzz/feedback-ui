@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "./Layout/Card";
+import Button from "./Layout/Button";
 
 const FeedBackForm = (props) => {
   const [text, setText] = useState("");
@@ -20,7 +21,7 @@ const FeedBackForm = (props) => {
             placeholder="Write a review"
             value={text}
           />
-          <button type="submit">send</button>
+          <Button type="submit">send</Button>
         </div>
       </form>
     </Card>
