@@ -5,8 +5,20 @@ import Button from "./Layout/Button";
 
 const FeedBackForm = (props) => {
   const [text, setText] = useState("");
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [msg, setMsg] = useState("");
 
   const handletextChange = (e) => {
+    if (text === "") {
+      setBtnDisabled(true);
+      setMsg(null);
+    } else if (text !== "" && text.trim().length <= 10) {
+      setBtnDisabled(true);
+      setMsg("Text must be atleast 10 characters");
+    } else {
+      setMsg(null);
+      setBtnDisabled(false);
+    }
     setText(e.target.value);
   };
 
@@ -21,9 +33,12 @@ const FeedBackForm = (props) => {
             placeholder="Write a review"
             value={text}
           />
-          <Button type="submit">send</Button>
+          <Button type="submit" isDisabled={btnDisabled}>
+            send
+          </Button>
         </div>
       </form>
+      {msg && <div className="message">{msg}</div>}
     </Card>
   );
 };
