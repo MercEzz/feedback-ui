@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FeedBackItem from "./FeedBackItem";
 import PropTypes from "prop-types";
+import FeedbackContext from "../context/FeedBackContext";
 
-const FeedBackList = ({ feedback, deleteFunc }) => {
+const FeedBackList = ({ deleteFunc }) => {
+  const { feedback } = useContext(FeedbackContext);
+
   if (!feedback || feedback.length === 0) {
     return <p>no feedback yet</p>;
   }
@@ -23,10 +26,6 @@ const FeedBackList = ({ feedback, deleteFunc }) => {
       </AnimatePresence>
     </div>
   );
-};
-
-FeedBackList.propTypes = {
-  feedback: PropTypes.array,
 };
 
 export default FeedBackList;
