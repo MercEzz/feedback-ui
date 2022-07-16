@@ -4,7 +4,7 @@ import Card from "./Layout/Card";
 import Button from "./Layout/Button";
 import RatingSelect from "./RatingSelect";
 
-const FeedBackForm = (props) => {
+const FeedBackForm = ({ handleAdd }) => {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(10);
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -24,9 +24,22 @@ const FeedBackForm = (props) => {
     setText(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,
+        rating,
+      };
+
+      handleAdd(newFeedback);
+    }
+    setText("");
+  };
+
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>Rate our service</h2>
         <RatingSelect select={(rating) => setRating(rating)} />
         <div className="input-group">
