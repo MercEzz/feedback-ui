@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import FeedBackItem from "./FeedBackItem";
 import PropTypes from "prop-types";
 
@@ -8,9 +9,18 @@ const FeedBackList = ({ feedback, deleteFunc }) => {
   }
   return (
     <div className="feedback-list">
-      {feedback.map((item) => (
-        <FeedBackItem key={item.id} deleteFunc={deleteFunc} item={item} />
-      ))}
+      <AnimatePresence>
+        {feedback.map((item) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <FeedBackItem key={item.id} deleteFunc={deleteFunc} item={item} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 };
