@@ -1,18 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import Card from "./Layout/Card";
 import Button from "./Layout/Button";
 import RatingSelect from "./RatingSelect";
 import FeedbackContext from "../context/FeedBackContext";
 
 const FeedBackForm = () => {
-  const { addFeedback, feedbackEdit, updateFeedback } =
-    useContext(FeedbackContext);
-
   const [text, setText] = useState("");
   const [rating, setRating] = useState(10);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [msg, setMsg] = useState("");
+
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext);
 
   useEffect(() => {
     if (feedbackEdit.edit === true) {
@@ -20,20 +19,20 @@ const FeedBackForm = () => {
       setText(feedbackEdit.item.text);
       setRating(feedbackEdit.item.rating);
     }
-  }, []);
+  }, [feedbackEdit]);
 
-  const handletextChange = (e) => {
-    if (text === "") {
+  const handletextChange = ({ target: { value } }) => {
+    if (value === "") {
       setBtnDisabled(true);
       setMsg(null);
-    } else if (text !== "" && text.trim().length <= 10) {
+    } else if (value !== "" && value.trim().length <= 10) {
       setBtnDisabled(true);
       setMsg("Text must be atleast 10 characters");
     } else {
       setMsg(null);
       setBtnDisabled(false);
     }
-    setText(e.target.value);
+    setText(value);
   };
 
   const handleSubmit = (e) => {
@@ -46,8 +45,12 @@ const FeedBackForm = () => {
 
       if (feedbackEdit.edit === true) {
         updateFeedback(feedbackEdit.item.id, newFeedback);
+      } else {
+        addFeedback(newFeedback);
       }
-      addFeedback(newFeedback);
+
+      setBtnDisabled(true);
+      setRating(10);
       setText("");
     }
   };
@@ -56,7 +59,7 @@ const FeedBackForm = () => {
     <Card>
       <form onSubmit={handleSubmit}>
         <h2>Rate our service</h2>
-        <RatingSelect select={(rating) => setRating(rating)} />
+        <RatingSelect select={setRating} selected={rating} />
         <div className="input-group">
           <input
             onChange={handletextChange}

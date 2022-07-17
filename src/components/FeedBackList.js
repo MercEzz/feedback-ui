@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FeedBackItem from "./FeedBackItem";
-import PropTypes from "prop-types";
 import FeedbackContext from "../context/FeedBackContext";
 import Spinner from "./Layout/Spinner";
 
@@ -22,6 +21,7 @@ const FeedBackList = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            layout
           >
             <FeedBackItem key={item.id} item={item} />
           </motion.div>
