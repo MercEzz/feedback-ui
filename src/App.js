@@ -4,7 +4,6 @@ import FeedBackForm from "./components/FeedBackForm";
 import FeedBackList from "./components/FeedBackList";
 import FeedBackStats from "./components/FeedBackStats";
 import Header from "./components/Header";
-import FeedbackData from "./data/FeedBackData";
 import AboutPage from "./pages/AboutPage";
 import AboutIconLink from "./components/AboutIconLink";
 import { FeedbackProvider } from "./context/FeedBackContext";
